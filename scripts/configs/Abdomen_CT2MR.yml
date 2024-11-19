@@ -1,0 +1,39 @@
+SOURCE: CT
+TARGET: MR
+NUM_WORKERS: 4
+FULLY_SUPERVISED: False
+DATASETS: 'Abdomen_original'
+TRAIN:
+  DA_METHOD: Histogram+AdvEnt+MT+cutMix+boundary
+  LOGFILE_NAME: 'EMA'
+  MODEL: DeepLabv2
+  RESTORE_FROM:   ../pretrained_model/training/Abdomen_CT2MR_10000.pth
+  EMA_RESTORE_FROM: ../pretrained_model/training/Abdomen_CT2MR_10000.pth
+  # RESTORE_FROM:   /home/lyn/CVPR_TMI/scripts/experiments/snapshots/CT2MR/CVPR_CT2MR/0_122_model_best.pth
+  # EMA_RESTORE_FROM: /home/lyn/CVPR_TMI/scripts/experiments/snapshots/CT2MR/CVPR_CT2MR/0_122_model_best.pth
+  D_AUX_RESTORE:  ../pretrained_model/training/Abdomen_CT2MR_10000_D_aux.pth
+  D_MAIN_RESTORE: ../pretrained_model/training/Abdomen_CT2MR_10000_D_main.pth
+  D_TYPE:         Original_D
+  D_NORM:          Batch_Norm
+  MULTI_LEVEL: True
+  THRESHOLD: 0.98
+  CONSWITCH: 1
+  MIXMETHOD : 'CUT'
+  OPTIM_G: 'SGD'
+  LEARNING_RATE: 0.0005
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+
+  MAX_ITERS: 50000
+  SAVE_PRED_EVERY: 100
+
+  RANDOM_SEED: 2039
+
+  LAMBDA_ADV_MAIN:      0.003
+  LAMBDA_ADV_AUX:       0.00002
+  LAMBDA_DICE_SRC_MAIN:   1.0
+  LAMBDA_DICE_SRC_AUX:    0.1
+  LAMBDA_SEG_SRC_MAIN: 1.0
+  LAMBDA_SEG_SRC_AUX: 0.1
+
+

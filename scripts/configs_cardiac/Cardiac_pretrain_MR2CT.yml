@@ -1,0 +1,47 @@
+SOURCE: MR
+TARGET: CT
+NUM_WORKERS: 4
+FULLY_SUPERVISED: False
+DATASETS: 'Cardiac'
+TRAIN:
+  DA_METHOD: Hard_CACMix_CowMix+MT
+  ADVENT_METHOD: CowMix_Hard_2_3
+  LOGFILE_NAME: 'Hard_lr001_1234'
+  MODEL: DeepLabv2
+  RESTORE_FROM:   ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  EMA_RESTORE_FROM: ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  # RESTORE_FROM:   ../pretrained_model/training/Cardiac_MR2CT_model_FDA_DiceAdvent_1w_001.pth
+  # EMA_RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_model_FDA_DiceAdvent_1w_001.pth
+  # RESTORE_FROM:   ../pretrained_model/training/Cardiac_MR2CT_model_CycleGAN_Advent_best.pth
+  # EMA_RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_model_CycleGAN_Advent_best.pth
+  # RESTORE_FROM:   /home/data_backup/lyn/MR2CT/CVPR_MR2CT/117_Cardiac_MR2CT_model_AdvEnt_ourDiceAdvent_001_1234.pth
+  # EMA_RESTORE_FROM: /home/data_backup/lyn/MR2CT/CVPR_MR2CT/117_Cardiac_MR2CT_model_AdvEnt_ourDiceAdvent_001_1234.pth
+  # RESTORE_FROM:   ../pretrained_model/training/Cardiac_MR2CT_model_AdvEnt_Advent_best.pth
+  # EMA_RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_model_AdvEnt_Advent_best.pth
+  D_TYPE:         Original_D
+  D_NORM:          Batch_Norm
+  MULTI_LEVEL: True
+
+  OPTIM_G: 'SGD'
+  LEARNING_RATE: 0.001
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+  # THRESHOLD: 0.90
+  CONSWITCH: 1
+
+  MAX_ITERS: 50000
+  SAVE_PRED_EVERY: 500
+  BATCH_SIZE: 4
+
+  RANDOM_SEED: 1234
+
+  LAMBDA_ADV_MAIN:      0.003
+  LAMBDA_ADV_AUX:       0.00002
+  LAMBDA_DICE_SRC_MAIN:   1.0
+  LAMBDA_DICE_SRC_AUX:    0.1
+  LAMBDA_SEG_SRC_MAIN: 1.0
+  LAMBDA_SEG_SRC_AUX: 0.1
+
+TEST:
+  MODE: best
+

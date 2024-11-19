@@ -1,0 +1,201 @@
+!!python/object/new:easydict.EasyDict
+dictitems:
+  DATASETS: Cardiac
+  EXP_NAME: MR2CT/MPSCL_MR2CT
+  EXP_ROOT: /home/lyn/CVPR_TMI/scripts/experiments
+  EXP_ROOT_LOGS: /home/lyn/CVPR_TMI/scripts/experiments/logs
+  EXP_ROOT_SNAPSHOT: /home/lyn/CVPR_TMI/scripts/experiments/snapshots
+  FULLY_SUPERVISED: false
+  NUM_CLASSES: 5
+  NUM_WORKERS: 4
+  SOURCE: MR
+  TARGET: CT
+  TEST: &id014 !!python/object/new:easydict.EasyDict
+    dictitems:
+      BATCH_SIZE_TARGET: 1
+      IMG_MEAN: &id001 !!python/object/apply:numpy.core.multiarray._reconstruct
+        args:
+        - &id009 !!python/name:numpy.ndarray ''
+        - !!python/tuple
+          - 0
+        - !!binary |
+          Yg==
+        state: !!python/tuple
+        - 1
+        - !!python/tuple
+          - 3
+        - &id010 !!python/object/apply:numpy.dtype
+          args:
+          - f4
+          - false
+          - true
+          state: !!python/tuple
+          - 3
+          - <
+          - null
+          - null
+          - null
+          - -1
+          - -1
+          - 0
+        - false
+        - !!binary |
+          lAPQQmlW6UKbW/VC
+      INFO_TARGET: /home/lyn/advent/dataset/cityscapes_list/info.json
+      INPUT_SIZE_TARGET: &id002
+      - 256
+      - 256
+      MODE: best
+      MODEL: &id003
+      - DeepLabv2
+      MODEL_WEIGHT: &id004
+      - 1.0
+      MULTI_LEVEL: &id005
+      - true
+      OUTPUT_SIZE_TARGET: &id006
+      - 256
+      - 256
+      RESTORE_FROM: &id007
+      - ''
+      SET_TARGET: val
+      SNAPSHOT_DIR: &id008
+      - ''
+      SNAPSHOT_MAXITER: 120000
+      SNAPSHOT_STEP: 1000
+      WAIT_MODEL: true
+    state:
+      BATCH_SIZE_TARGET: 1
+      IMG_MEAN: *id001
+      INFO_TARGET: /home/lyn/advent/dataset/cityscapes_list/info.json
+      INPUT_SIZE_TARGET: *id002
+      MODE: best
+      MODEL: *id003
+      MODEL_WEIGHT: *id004
+      MULTI_LEVEL: *id005
+      OUTPUT_SIZE_TARGET: *id006
+      RESTORE_FROM: *id007
+      SET_TARGET: val
+      SNAPSHOT_DIR: *id008
+      SNAPSHOT_MAXITER: 120000
+      SNAPSHOT_STEP: 1000
+      WAIT_MODEL: true
+  TRAIN: &id015 !!python/object/new:easydict.EasyDict
+    dictitems:
+      BATCH_SIZE: 4
+      CONSWITCH: 0
+      D: ''
+      DA_METHOD: Histogram+AdvEnt+MT+cutMix+boundary
+      D_AUX_RESTORE: ../pretrained_model/training/Cardiac_MR2CT_10000_D_aux.pth
+      D_MAIN_RESTORE: ../pretrained_model/training/Cardiac_MR2CT_10000_D_main.pth
+      D_NORM: Batch_Norm
+      D_TYPE: Original_D
+      EARLY_STOP: 30000
+      EMA_RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_10000.pth
+      IMG_MEAN: &id011 !!python/object/apply:numpy.core.multiarray._reconstruct
+        args:
+        - *id009
+        - !!python/tuple
+          - 0
+        - !!binary |
+          Yg==
+        state: !!python/tuple
+        - 1
+        - !!python/tuple
+          - 3
+        - *id010
+        - false
+        - !!binary |
+          lAPQQmlW6UKbW/VC
+      INPUT_SIZE_SOURCE: &id012
+      - 256
+      - 256
+      INPUT_SIZE_TARGET: &id013
+      - 256
+      - 256
+      LAMBDA_ADV_AUX: 2.0e-05
+      LAMBDA_ADV_MAIN: 0.003
+      LAMBDA_DICE_SRC_AUX: 0.1
+      LAMBDA_DICE_SRC_MAIN: 1.0
+      LAMBDA_ENT_AUX: 0.0002
+      LAMBDA_ENT_MAIN: 0.001
+      LAMBDA_SEG_SRC_AUX: 0.1
+      LAMBDA_SEG_SRC_MAIN: 1.0
+      LEARNING_RATE: 0.00025
+      LEARNING_RATE_D: 0.0001
+      LOGFILE_NAME: EMA
+      LR_Decay: true
+      MAX_ITERS: 50000
+      MIXMETHOD: CUT
+      MODEL: DeepLabv2
+      MOMENTUM: 0.9
+      MULTI_LEVEL: true
+      OPTIM_G: SGD
+      POWER: 0.9
+      PreTrain: true
+      RANDOM_SEED: 2039
+      RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_10000.pth
+      SAVE_PRED_EVERY: 500
+      SNAPSHOT_DIR: /home/lyn/CVPR_TMI/scripts/experiments/snapshots/MR2CT/MPSCL_MR2CT
+      TENSORBOARD_LOGDIR: /home/lyn/CVPR_TMI/scripts/experiments/logs/tensorboard/MR2CT/MPSCL_MR2CT
+      TENSORBOARD_VIZRATE: 100
+      THRESHOLD: 0.9
+      UPDATE_CENTER_METHOD: iter
+      WEIGHT_DECAY: 0.0005
+    state:
+      BATCH_SIZE: 4
+      CONSWITCH: 0
+      D: ''
+      DA_METHOD: Histogram+AdvEnt+MT+cutMix+boundary
+      D_AUX_RESTORE: ../pretrained_model/training/Cardiac_MR2CT_10000_D_aux.pth
+      D_MAIN_RESTORE: ../pretrained_model/training/Cardiac_MR2CT_10000_D_main.pth
+      D_NORM: Batch_Norm
+      D_TYPE: Original_D
+      EARLY_STOP: 30000
+      EMA_RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_10000.pth
+      IMG_MEAN: *id011
+      INPUT_SIZE_SOURCE: *id012
+      INPUT_SIZE_TARGET: *id013
+      LAMBDA_ADV_AUX: 2.0e-05
+      LAMBDA_ADV_MAIN: 0.003
+      LAMBDA_DICE_SRC_AUX: 0.1
+      LAMBDA_DICE_SRC_MAIN: 1.0
+      LAMBDA_ENT_AUX: 0.0002
+      LAMBDA_ENT_MAIN: 0.001
+      LAMBDA_SEG_SRC_AUX: 0.1
+      LAMBDA_SEG_SRC_MAIN: 1.0
+      LEARNING_RATE: 0.00025
+      LEARNING_RATE_D: 0.0001
+      LOGFILE_NAME: EMA
+      LR_Decay: true
+      MAX_ITERS: 50000
+      MIXMETHOD: CUT
+      MODEL: DeepLabv2
+      MOMENTUM: 0.9
+      MULTI_LEVEL: true
+      OPTIM_G: SGD
+      POWER: 0.9
+      PreTrain: true
+      RANDOM_SEED: 2039
+      RESTORE_FROM: ../pretrained_model/training/Cardiac_MR2CT_10000.pth
+      SAVE_PRED_EVERY: 500
+      SNAPSHOT_DIR: /home/lyn/CVPR_TMI/scripts/experiments/snapshots/MR2CT/MPSCL_MR2CT
+      TENSORBOARD_LOGDIR: /home/lyn/CVPR_TMI/scripts/experiments/logs/tensorboard/MR2CT/MPSCL_MR2CT
+      TENSORBOARD_VIZRATE: 100
+      THRESHOLD: 0.9
+      UPDATE_CENTER_METHOD: iter
+      WEIGHT_DECAY: 0.0005
+  UDA: true
+state:
+  DATASETS: Cardiac
+  EXP_NAME: MR2CT/MPSCL_MR2CT
+  EXP_ROOT: /home/lyn/CVPR_TMI/scripts/experiments
+  EXP_ROOT_LOGS: /home/lyn/CVPR_TMI/scripts/experiments/logs
+  EXP_ROOT_SNAPSHOT: /home/lyn/CVPR_TMI/scripts/experiments/snapshots
+  FULLY_SUPERVISED: false
+  NUM_CLASSES: 5
+  NUM_WORKERS: 4
+  SOURCE: MR
+  TARGET: CT
+  TEST: *id014
+  TRAIN: *id015
+  UDA: true

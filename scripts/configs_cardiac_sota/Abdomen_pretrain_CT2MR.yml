@@ -1,0 +1,46 @@
+SOURCE: CT
+TARGET: MR
+NUM_WORKERS: 4
+FULLY_SUPERVISED: False
+DATASETS: 'Abdomen_original'
+TRAIN:
+  DA_METHOD: TCutMix+AdvEnt+MT
+  ADVENT_METHOD: PatchGAN
+  LOGFILE_NAME: 'finish_lr001_Patch'
+  MODEL: DeepLabv2
+  # RESTORE_FROM:   ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  # EMA_RESTORE_FROM: ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  # RESTORE_FROM:   ../pretrained_model/training/Abdomen_CT2MR_10000.pth
+  # EMA_RESTORE_FROM: ../pretrained_model/training/Abdomen_CT2MR_10000.pth
+  RESTORE_FROM:   ../pretrained_model/training_new/2_Abdomen_original_CT2MR_model_Original_ourDiceAdvent_1w_001.pth
+  EMA_RESTORE_FROM: ../pretrained_model/training_new/2_Abdomen_original_CT2MR_model_Original_ourDiceAdvent_1w_001.pth
+  # D_AUX_RESTORE:  ../pretrained_model/training_new/2_Abdomen_original_CT2MR_model_SR_ourDiceAdvent_D_aux_1w_001.pth
+  # D_MAIN_RESTORE: ../pretrained_model/training_new/2_Abdomen_original_CT2MR_model_SR_ourDiceAdvent_D_main_1w_001.pth
+  # D_TYPE:         Original_D
+  D_TYPE:         PatchGAN
+  D_NORM:          Batch_Norm
+  MULTI_LEVEL: True
+
+  OPTIM_G: 'SGD'
+  LEARNING_RATE: 0.001
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+  # THRESHOLD: 0.90
+  CONSWITCH: 0
+
+  MAX_ITERS: 10000
+  SAVE_PRED_EVERY: 500
+  BATCH_SIZE: 4
+
+  RANDOM_SEED: 1234
+
+  LAMBDA_ADV_MAIN:      0.003
+  LAMBDA_ADV_AUX:       0.00002
+  LAMBDA_DICE_SRC_MAIN:   1.0
+  LAMBDA_DICE_SRC_AUX:    0.1
+  LAMBDA_SEG_SRC_MAIN: 1.0
+  LAMBDA_SEG_SRC_AUX: 0.1
+
+TEST:
+  MODE: best
+

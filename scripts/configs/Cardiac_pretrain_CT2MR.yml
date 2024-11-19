@@ -1,0 +1,35 @@
+SOURCE: CT
+TARGET: MR
+NUM_WORKERS: 4
+FULLY_SUPERVISED: False
+DATASETS: 'Cardiac'
+TRAIN:
+  DA_METHOD: Histogram
+  LOGFILE_NAME: 'pretrain'
+  MODEL: DeepLabv2
+  RESTORE_FROM:   ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  EMA_RESTORE_FROM: ../pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  D_TYPE:         Original_D
+  D_NORM:          Batch_Norm
+  MULTI_LEVEL: True
+
+  OPTIM_G: 'SGD'
+  LEARNING_RATE: 0.00025
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+
+  MAX_ITERS: 10000
+  SAVE_PRED_EVERY: 100
+
+  RANDOM_SEED: 1234
+
+  LAMBDA_ADV_MAIN:      0.003
+  LAMBDA_ADV_AUX:       0.00002
+  LAMBDA_DICE_SRC_MAIN:   1.0
+  LAMBDA_DICE_SRC_AUX:    0.1
+  LAMBDA_SEG_SRC_MAIN: 1.0
+  LAMBDA_SEG_SRC_AUX: 0.1
+
+TEST:
+  MODE: best
+

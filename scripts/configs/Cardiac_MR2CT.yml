@@ -1,0 +1,38 @@
+SOURCE: MR
+TARGET: CT
+NUM_WORKERS: 4
+FULLY_SUPERVISED: False
+DATASETS: 'Cardiac'
+TRAIN:
+  DA_METHOD: Hard_CACMix_cutmix+MT
+  LOGFILE_NAME: 'EMA_1234'
+  MODEL: DeepLabv2
+  RESTORE_FROM:   /home/zhr/CVPR_TMI/pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  EMA_RESTORE_FROM: /home/zhr/CVPR_TMI/pretrained_model/training/DeepLab_resnet_pretrained_imagenet.pth
+  D_AUX_RESTORE:  ../pretrained_model/training/Cardiac_MR2CT_10000_D_aux.pth
+  D_MAIN_RESTORE: ../pretrained_model/training/Cardiac_MR2CT_10000_D_main.pth
+  CLASS_CENTER_FEA_INIT: /home/zhr/ICME/pretrained_model/training/class_center_feas_Cardiac_MR2CT.npy
+  D_TYPE:         Original_D
+  D_NORM:          Batch_Norm
+  MULTI_LEVEL: True
+  THRESHOLD: 0.90
+  CONSWITCH: 1
+  MIXMETHOD : 'CUT'
+  OPTIM_G: 'SGD'
+  LEARNING_RATE: 0.00025
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 0.0005
+
+  MAX_ITERS: 50000
+  SAVE_PRED_EVERY: 500
+
+  RANDOM_SEED: 1234
+
+  LAMBDA_ADV_MAIN:      0.003
+  LAMBDA_ADV_AUX:       0.00002
+  LAMBDA_DICE_SRC_MAIN:   1.0
+  LAMBDA_DICE_SRC_AUX:    0.1
+  LAMBDA_SEG_SRC_MAIN: 1.0
+  LAMBDA_SEG_SRC_AUX: 0.1
+
+
